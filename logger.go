@@ -2,6 +2,7 @@ package logger
 
 import (
 	"context"
+	"example-logger/utils"
 
 	"go.uber.org/zap"
 	"go.uber.org/zap/zapcore"
@@ -11,6 +12,7 @@ const (
 	contextKey     = "context"
 	serviceNameKey = "service"
 	environmentKey = "environment"
+	requestIDKey   = "requestID"
 )
 
 // Field alias to zapcore.Field for shorter declarations
@@ -23,7 +25,7 @@ type Logger struct {
 	logger      *zap.Logger
 }
 
-// New creates and return new logger instance
+// New creates and return new logger instance and setup common log configs
 func New(serviceName, environment string) (*Logger, error) {
 	logger, err := zap.NewProduction()
 	if err != nil {
@@ -41,14 +43,18 @@ func New(serviceName, environment string) (*Logger, error) {
 
 // Info logs at info level
 func (l *Logger) Info(ctx context.Context, message string, fields ...zapcore.Field) {
-	l.logger.With(zap.Any(contextKey, ctx)).Info(message, fields...)
+	l.withRequestID(ctx).Info(message, fields...)
 
 	// Do other things
 }
 
 // Error logs at error level
 func (l *Logger) Error(ctx context.Context, err error, fields ...zapcore.Field) {
-	l.logger.With(zap.Any(contextKey, ctx)).Error(err.Error(), fields...)
+	l.withRequestID(ctx).Error(err.Error(), fields...)
 
 	// Do other things
+}
+
+func (l *Logger) withRequestID(ctx context.Context) *zap.Logger {
+	return l.logger.With(zap.String(requestIDKey, utils.GetCorrelationID(ctx)))
 }
