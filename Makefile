@@ -6,4 +6,4 @@ tag:
 	git tag v0.1.1
 
 list:
-	GOPROXY=proxy.golang.org go list -m example-logger
+	GOPROXY=proxy.golang.org go list -m github.com/darklongnightt/example-logger
