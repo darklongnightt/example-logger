@@ -9,6 +9,7 @@ import (
 var staticLogger *Logger
 
 // InitStaticLogger inits static logger singleton
+// Static logger should be init before static methods can be invoked, otherwise resulting in panic
 func InitStaticLogger(serviceName, environment string) error {
 	logger, err := New(serviceName, environment)
 	if err != nil {
