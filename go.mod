@@ -1,4 +1,4 @@
-module example-logger
+module github.com/darklongnightt/example-logger
 
 go 1.19
 

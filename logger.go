@@ -2,8 +2,8 @@ package logger
 
 import (
 	"context"
-	"example-logger/utils"
 
+	"github.com/darklongnightt/example-logger/utils"
 	"go.uber.org/zap"
 	"go.uber.org/zap/zapcore"
 )

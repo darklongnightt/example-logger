@@ -3,11 +3,11 @@ package main
 import (
 	"context"
 	"errors"
-	logger "example-logger"
 	"fmt"
 	"log"
 	"time"
 
+	logger "github.com/darklongnightt/example-logger"
 	"go.uber.org/zap"
 )
 
