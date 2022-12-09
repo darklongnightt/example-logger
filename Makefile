@@ -1,2 +1,3 @@
 start:
-	go run cmd/main.go
+	go run cmd/logger/main.go
+	go run cmd/static_logger/main.go
